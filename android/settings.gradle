@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'UWMobile3App'
+rootProject.name = 'UWMobileApp'
 
 dependencyResolutionManagement {
   versionCatalogs {

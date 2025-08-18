@@ -8,8 +8,8 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { AppTheme } from '@/constants/AppTheme';
+import { AuthProvider } from '@/contexts/AuthContext';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -29,23 +29,28 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{
-        headerStyle: {
-          backgroundColor: AppTheme.colors.primary,
-        },
-        headerTintColor: 'white',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="trip/[id]" options={{ headerShown: false }} />
-        <Stack.Screen name="trip/detention-request" options={{ headerShown: false }} />
-        <Stack.Screen name="reimbursement/new-request" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack screenOptions={{
+          headerStyle: {
+            backgroundColor: AppTheme.colors.primary,
+          },
+          headerTintColor: 'white',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+        initialRouteName="auth-check">
+          <Stack.Screen name="auth-check" options={{ headerShown: false }} />
+          <Stack.Screen name="login" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="trip/[id]" options={{ headerShown: false }} />
+          <Stack.Screen name="trip/detention-request" options={{ headerShown: false }} />
+          <Stack.Screen name="reimbursement/new-request" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
