@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file should contain your data sharing and privacy policy declarations -->
+<!-- Replace with your actual privacy policy requirements for Google Play -->
+<data-sharing-policy>
+    <data-types>
+        <!-- Define what types of data your app collects -->
+        <!-- Example: user_credentials, device_info, usage_analytics -->
+    </data-types>
+    <sharing-practices>
+        <!-- Define how data is shared with third parties -->
+        <!-- This should match your Play Console privacy declarations -->
+    </sharing-practices>
+</data-sharing-policy>

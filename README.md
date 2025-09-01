@@ -1,62 +1,145 @@
-# Welcome to your Expo app 👋
+# UWMobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Professional mobile application for logistics and transportation management.
 
-## Get started
+## Prerequisites
 
-1. Install dependencies
+- **Node.js**: 18.0.0 or higher
+- **Java JDK**: 17 or higher (for Android development)
+- **Android Studio**: Latest version with Android SDK
+- **Git**: For version control
 
+## Technology Stack
+
+| Component | Version |
+|-----------|---------|
+| Expo SDK | 53.0.20 |
+| React Native | 0.79.6 |
+| React | 19.0.0 |
+| TypeScript | 5.8.3 |
+| Android Target SDK | 35 |
+| Android Min SDK | 24 |
+
+## Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd uwmobile-newrepo
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. **Environment configuration**
    ```bash
-    npx expo start
+   cp .env.example .env
    ```
 
-In the output, you'll find options to open the app in a
+   Configure environment variables in `.env`:
+   ```env
+   EXPO_PUBLIC_ENV=local
+   EXPO_PUBLIC_API_URL_ANDROID=http://10.0.2.2:5000
+   EXPO_PUBLIC_API_URL_IOS=http://localhost:5000
+   EXPO_PUBLIC_APP_NAME=UWMobile Local
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Development
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-
-## Development environment
-
-### npm location
-npm is installed at `/opt/homebrew/bin/npm` through Homebrew.
-
-### Starting the Android emulator
-Since npm, npx, and node are installed in Homebrew but not in the PATH, use the following command to start the app on the Android emulator:
+### Start Development Server
 
 ```bash
-export PATH="/opt/homebrew/bin:$PATH" && npx expo start --android
+npm start
 ```
+
+### Platform-Specific Development
+
+**Android**
+```bash
+npm run android
+```
+
+**Web Browser**
+```bash
+npm run web
+```
+
+## Production Build
+
+### Android App Bundle (for Google Play Store)
+
+```bash
+cd android
+./gradlew bundleRelease
+```
+
+**Output**: `android/app/build/outputs/bundle/release/app-release.aab`
+
+### Android APK (for testing)
+
+```bash
+cd android
+./gradlew assembleRelease
+```
+
+**Output**: `android/app/build/outputs/apk/release/app-release.apk`
+
+## Environment Configuration
+
+The application supports multiple environments:
+
+- **local**: Development environment
+- **dev**: Development server environment  
+- **staging**: Pre-production environment
+
+Configure the environment by setting `EXPO_PUBLIC_ENV` in your `.env` file.
+
+## Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start Metro bundler |
+| `npm run android` | Run Android development build |
+| `npm run web` | Run web version |
+| `npm test` | Run test suite |
+| `npm run lint` | Run ESLint |
+| `npm run prebuild` | Generate native Android project |
+
+## Authentication
+
+The application requires user authentication. Users must sign in with valid credentials to access the main application features.
+
+## Build Requirements
+
+### Android
+- **Android Studio**: Latest version
+- **Android SDK**: API level 24-35
+- **Java JDK**: 17 or higher
+- **Gradle**: 8.10.2
+- **Kotlin**: 2.0.21
+
+## Troubleshooting
+
+### Common Issues
+
+**Metro bundler cache issues**
+```bash
+npm start -- --reset-cache
+```
+
+**Android build issues**
+```bash
+cd android && ./gradlew clean
+```
+
+**Dependency conflicts**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Android Build Environment
+
+Ensure the following environment variables are set:
